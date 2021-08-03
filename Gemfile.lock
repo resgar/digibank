@@ -62,9 +62,12 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    after_commit_everywhere (1.0.0)
+      activerecord (>= 4.2)
     ansi (1.5.0)
     ast (2.4.2)
     backport (1.2.0)
+    bcrypt (3.1.16)
     benchmark (0.1.1)
     better_html (1.0.16)
       actionview (>= 4.0)
@@ -189,6 +192,17 @@ GEM
     reverse_markdown (2.0.0)
       nokogiri
     rexml (3.2.5)
+    roda (3.46.0)
+      rack
+    rodauth (2.15.0)
+      roda (>= 2.6.0)
+      sequel (>= 4)
+    rodauth-rails (0.15.0)
+      bcrypt
+      railties (>= 4.2, < 7)
+      rodauth (~> 2.15)
+      sequel-activerecord_connection (~> 1.1)
+      tilt
     rubocop (1.18.4)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -220,6 +234,11 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    sequel (5.47.0)
+    sequel-activerecord_connection (1.2.3)
+      activerecord (>= 4.2, < 7)
+      after_commit_everywhere (~> 1.0)
+      sequel (~> 5.16)
     smart_properties (1.15.0)
     solargraph (0.43.0)
       backport (~> 1.2)
@@ -290,6 +309,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
+  rodauth-rails (~> 0.15)
   rubocop-rails
   sass-rails (>= 6)
   selenium-webdriver
