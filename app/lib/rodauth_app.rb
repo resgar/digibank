@@ -1,7 +1,7 @@
 class RodauthApp < Rodauth::Rails::App
   configure do
     # List of authentication features that are loaded.
-    enable :login, :logout, :remember
+    enable :create_account, :login, :logout, :remember
 
     # See the Rodauth documentation for the list of available config options:
     # http://rodauth.jeremyevans.net/documentation.html
@@ -9,13 +9,10 @@ class RodauthApp < Rodauth::Rails::App
     # ==> General
     # The secret key used for hashing public-facing tokens for various features.
     # Defaults to Rails `secret_key_base`, but you can use your own secret key.
-    # hmac_secret "b4e6db8a4bbbba5a1e3440614415bc8c9ea9c9eb5b068f425ba7d0299c4eafd88e09a5b3b279483f66ecab2f8013e8152d772ecf56292855f01d10748fed9687"
+    # hmac_secret "f1fadc9b9b9391c7e068ab7ef55b0fea177efaa0797843e6bbf99bcff00bf0f8c616971f3fc6f23a095523749bb0fd4d9ad8295cd5c2c1b4748a4f17930f6d49"
 
     # Specify the controller used for view rendering and CSRF verification.
     rails_controller { RodauthController }
-
-    # Store account status in a text column.
-    account_status_column :status
 
     # Store password hash in a column instead of a separate table.
     # account_password_hash_column :password_digest
@@ -26,9 +23,6 @@ class RodauthApp < Rodauth::Rails::App
 
     # Autologin the user after they have reset their password.
     # reset_password_autologin? true
-
-    # Delete the account record when the user has closed their account.
-    # delete_account_on_close? true
 
     # Redirect to the app from login and registration pages if already logged in.
     # already_logged_in { redirect login_redirect }
@@ -86,6 +80,8 @@ class RodauthApp < Rodauth::Rails::App
     # ==> Deadlines
     # Change default deadlines for some actions.
     # verify_account_grace_period 3.days
+    # reset_password_deadline_interval Hash[hours: 6]
+    # verify_login_change_deadline_interval Hash[days: 2]
     # remember_deadline_interval Hash[days: 30]
   end
 

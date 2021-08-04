@@ -1,29 +1,25 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "sample app", root_path, id: "logo" %>
-    <nav>
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <ul class="nav navbar-nav navbar-right collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1">
-        <li><%= link_to "Home", root_path %></li>
-        <% if rodauth.logged_in? %>
-          <li class="dropdown">
-            <%= link_to "Log out", rodauth.logout_path, method: :delete %>
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <%= link_to "DigiBank", root_path, id: "logo", class: 'navbar-brand' %>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to "Home", root_path, class: "nav-link active", aria_current: "page" %>
           </li>
-        <% else %>
-          <li><%= link_to "Log in", rodauth.login_path %></li>
-        <% end %>
-      </ul>
-    </nav>
+          <li>
+          <% if rodauth.logged_in? %>
+            <li class="dropdown">
+              <%= link_to "Log out", rodauth.logout_path, method: :post, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li><%= link_to "Log in", rodauth.login_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+      </div>
   </div>
+  </nav>
 </header>
