@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_155036) do
+ActiveRecord::Schema.define(version: 2021_08_05_131643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -38,7 +38,20 @@ ActiveRecord::Schema.define(version: 2021_08_03_155036) do
     t.index ["account_id"], name: "index_bank_accounts_on_account_id"
   end
 
+  create_table "bank_transactions", force: :cascade do |t|
+    t.float "amount"
+    t.integer "status", limit: 2, default: 0
+    t.bigint "bank_account_id", null: false
+    t.bigint "output_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bank_account_id"], name: "index_bank_transactions_on_bank_account_id"
+    t.index ["output_id"], name: "index_bank_transactions_on_output_id"
+  end
+
   add_foreign_key "account_password_hashes", "accounts", column: "id"
   add_foreign_key "account_remember_keys", "accounts", column: "id"
   add_foreign_key "bank_accounts", "accounts"
+  add_foreign_key "bank_transactions", "bank_accounts"
+  add_foreign_key "bank_transactions", "bank_accounts", column: "output_id"
 end

@@ -1,0 +1,17 @@
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Input Account</th>
+      <th>Output Account</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% transactions.each do |transaction| %>
+      <%= render 'bank/transactions/transaction', transaction: transaction %>
+    <% end %>
+  </tbody>
+</table>

@@ -6,5 +6,6 @@ Rails
 
     namespace :bank do
       resource :account, only: :show
+      resources :transactions, only: :create
     end
   end
