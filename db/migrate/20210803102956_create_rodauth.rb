@@ -3,13 +3,7 @@ class CreateRodauth < ActiveRecord::Migration[6.1]
     enable_extension 'citext'
 
     create_table :accounts do |t|
-      t.citext :email,
-               null: false,
-               index: {
-                 unique: true,
-                 where: "status IN ('unverified', 'verified')",
-               }
-      t.string :status, null: false, default: 'verified'
+      t.citext :email, null: false, index: { unique: true }
     end
 
     # Used if storing password hashes in a separate table (default)

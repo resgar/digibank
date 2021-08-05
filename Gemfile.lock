@@ -69,14 +69,6 @@ GEM
     backport (1.2.0)
     bcrypt (3.1.16)
     benchmark (0.1.1)
-    better_html (1.0.16)
-      actionview (>= 4.0)
-      activesupport (>= 4.0)
-      ast (~> 2.0)
-      erubi (~> 1.4)
-      html_tokenizer (~> 0.0.6)
-      parser (>= 2.4)
-      smart_properties
     bindex (0.8.1)
     bootsnap (1.7.7)
       msgpack (~> 1.0)
@@ -96,19 +88,10 @@ GEM
     crass (1.0.6)
     diff-lcs (1.4.4)
     e2mmap (0.1.0)
-    erb_lint (0.1.1)
-      activesupport
-      better_html (~> 1.0.7)
-      html_tokenizer
-      parser (>= 2.7.1.4)
-      rainbow
-      rubocop
-      smart_properties
     erubi (1.10.0)
     ffi (1.15.3)
     globalid (0.5.2)
       activesupport (>= 5.0)
-    html_tokenizer (0.0.7)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
@@ -239,7 +222,6 @@ GEM
       activerecord (>= 4.2, < 7)
       after_commit_everywhere (~> 1.0)
       sequel (~> 5.16)
-    smart_properties (1.15.0)
     solargraph (0.43.0)
       backport (~> 1.2)
       benchmark
@@ -300,7 +282,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
-  erb_lint
   jbuilder (~> 2.7)
   listen (~> 3.3)
   minitest-reporters

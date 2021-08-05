@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_102956) do
+ActiveRecord::Schema.define(version: 2021_08_03_155036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -27,10 +27,18 @@ ActiveRecord::Schema.define(version: 2021_08_03_102956) do
 
   create_table "accounts", force: :cascade do |t|
     t.citext "email", null: false
-    t.string "status", default: "unverified", null: false
-    t.index ["email"], name: "index_accounts_on_email", unique: true, where: "((status)::text = ANY ((ARRAY['unverified'::character varying, 'verified'::character varying])::text[]))"
+    t.index ["email"], name: "index_accounts_on_email", unique: true
+  end
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.float "balance", default: 0.0, null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_bank_accounts_on_account_id"
   end
 
   add_foreign_key "account_password_hashes", "accounts", column: "id"
   add_foreign_key "account_remember_keys", "accounts", column: "id"
+  add_foreign_key "bank_accounts", "accounts"
 end

@@ -11,5 +11,17 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  module IntegrationHelperTest
+    def login(email: 'user@example.com', password: 'secret')
+      post '/login', as: :json, params: { login: email, password: password }
+    end
+
+    def logout
+      post '/logout',
+           as: :json,
+           headers: {
+             'Authorization' => headers['Authorization'],
+           }
+    end
+  end
 end

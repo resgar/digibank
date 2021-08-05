@@ -18,14 +18,15 @@ class RodauthApp < Rodauth::Rails::App
     # account_password_hash_column :password_digest
 
     # Redirect back to originally requested location after authentication.
-    # login_return_to_requested_location? true
+    login_return_to_requested_location? true
+
     # two_factor_auth_return_to_requested_location? true # if using MFA
 
     # Autologin the user after they have reset their password.
     # reset_password_autologin? true
 
     # Redirect to the app from login and registration pages if already logged in.
-    # already_logged_in { redirect login_redirect }
+    already_logged_in { redirect login_redirect }
 
     # ==> Flash
     # Match flash keys with ones already used in the Rails app.
@@ -74,6 +75,10 @@ class RodauthApp < Rodauth::Rails::App
     # end
 
     # ==> Redirects
+
+    # Redirect to home page after login.
+    login_redirect '/'
+
     # Redirect to home page after logout.
     logout_redirect '/'
 
