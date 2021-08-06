@@ -9,5 +9,10 @@ class ApplicationController < ActionController::Base
     rodauth.logout
     rodauth.login_required
   end
-  helper_method :current_account
+
+  def authenticate
+    rodauth.require_authentication # redirect to login page if not authenticated
+  end
+
+  helper_method :current_account, :authenticate
 end

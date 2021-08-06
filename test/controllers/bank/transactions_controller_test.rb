@@ -1,20 +1,25 @@
 require 'test_helper'
 
 class Bank::TransactionsControllerTest < ActionDispatch::IntegrationTest
-  setup { @bank_transaction = bank_transactions(:one) }
+  include IntegrationHelperTest
 
-  test 'should create bank_transaction' do
+  def setup
+    @user = ::Account.create(email: 'account@example.com', password: 'secret')
+    @user.create_bank_account(balance: 100)
+  end
+
+  test 'should create transaction' do
     assert_difference('Bank::Transaction.count') do
-      @source_account = bank_accounts(:one)
-      @destination_account = bank_accounts(:two)
+      target_user =
+        ::Account.create(email: 'target@example.com', password: 'secret')
+
+      login(email: 'account@example.com', password: 'secret')
 
       post bank_transactions_url,
            params: {
              bank_transaction: {
-               amount: @bank_transaction.amount,
-               bank_account_id: @source_account.id,
-               output_id: @destination_account.id,
-               status: @bank_transaction.status,
+               amount: 20,
+               output_email: target_user.email,
              },
            }
     end

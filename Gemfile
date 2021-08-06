@@ -32,7 +32,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'pry', '~> 0.13.1'
 
 # Provides authentication
-gem "rodauth-rails", "~> 0.15"
+gem 'rodauth-rails', '~> 0.15'
+
+# Provides a way of handling errors, exceptions and chaining functions.
+gem 'dry-monads', '~> 1.4.0'
+# a data validation library that provides a powerful DSL for defining schemas and validation rules.
+gem 'dry-validation', '~> 1.6.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
