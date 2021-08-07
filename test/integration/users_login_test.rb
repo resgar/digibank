@@ -4,13 +4,13 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   include IntegrationHelperTest
 
   def setup
-    @user = Account.create(email: 'account@example.com', password: 'secret')
+    @account = create(:bank_account).account
   end
 
   test 'login with valid email/invalid password' do
     get '/login'
     assert_select 'h2', 'Account Login'
-    login(email: 'account@example.com', password: 'invalid')
+    login(email: @account.email, password: 'invalid')
     assert_select 'h2', 'Account Login'
     assert_not flash.empty?
     get '/login'
@@ -19,7 +19,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test 'login with valid information followed by logout' do
     get '/login'
-    login(email: 'account@example.com', password: 'secret')
+    login(email: @account.email, password: @account.password)
     assert_redirected_to '/'
     follow_redirect!
     assert_select 'h1', 'Dashbaord'

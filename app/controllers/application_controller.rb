@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+
   before_action :current_account, if: -> { rodauth.logged_in? }
+  before_action :retried_request?
 
   private
 

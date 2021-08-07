@@ -69,6 +69,8 @@ group :test do
   gem 'webdrivers'
     # Adds custom Reporters for Minitest
   gem 'minitest-reporters'
+  # provides factory methods to create test fixtures.
+  gem "factory_bot_rails"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

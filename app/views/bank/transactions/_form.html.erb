@@ -2,7 +2,6 @@
   <% if bank_transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(bank_transaction.errors.count, "error") %> prohibited this bank_transaction from being saved:</h2>
-
       <ul>
         <% bank_transaction.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
+  <div class="form-group mb-3">
+    <%= form.label :recipient_email, class: "form-label" %>
+    <%= form.email_field :output_email, class: "form-control", ariaDescribedby: "emailHelp", placeholder: "Recipient email" %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status %>
+  <div class="form-group mb-3">
+    <%= form.label :amount, class: "form-label" %>
+    <%= form.text_field :amount, class: "form-control", placeholder: "Enter tranfer amount" %>
   </div>
 
-  <div class="field">
-    <%= form.label :bank_account_id %>
-    <%= form.text_field :bank_account_id %>
-  </div>
+  <%= form.hidden_field(:idempotency_key, value: @idempotency_key) %>
 
-  <div class="field">
-    <%= form.label :output %>
-    <%= form.text_field :output %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group mb-3">
+    <%= submit_tag 'Submit', class: "btn btn-primary" %>
   </div>
 <% end %>

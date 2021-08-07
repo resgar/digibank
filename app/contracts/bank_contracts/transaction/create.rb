@@ -3,8 +3,8 @@ module BankContracts
     class Create < Dry::Validation::Contract
       params do
         required(:amount).value(:float)
-        required(:bank_account_id).value(:integer)
-        required(:output_id).value(:integer)
+        required(:user_id).value(:integer)
+        required(:email).filled(:string)
       end
     end
   end

@@ -5,11 +5,10 @@ require 'minitest/reporters'
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+  include FactoryBot::Syntax::Methods
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  # Run tests in parallel with specified workers
+  # parallelize(workers: :number_of_processors)
 
   module IntegrationHelperTest
     def login(email: 'user@example.com', password: 'secret')

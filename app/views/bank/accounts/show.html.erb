@@ -1,15 +1,31 @@
-<h1>Dashbaord</h1>
-
-<p>
-  <strong>Account:</strong>
-  <%= @account.account_id %>
-</p>
-
-<p>
-  <strong>Balance:</strong>
-  <%= @account.balance %>
-</p>
-
-<h2>Transactions</h2>
-
-<%= render 'bank/transactions/transactions', transactions: @account.transactions %>
+ <div> 
+  <h1 class="p-3">Dashbaord</h1>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-sm">
+    <p class="h4">
+      Account #<%= @account.account_id %>
+    </p>
+    <br>
+    <p class="h4">
+      <strong>Balance:</strong>
+      $<%= @account.balance %>
+    </p>
+  </div>
+  <div class="col-sm">
+    <h2>New Transaction</h2>
+    <%= render 'bank/transactions/form', bank_transaction: @transaction %>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-sm">
+    <h3>Input Transactions</h2>
+    <%= render 'bank/transactions/transactions', transactions: @input_transactions %>
+  </div>
+  <div class="col-sm">
+    <h3>Output Transactions</h2>
+    <%= render 'bank/transactions/transactions', transactions: @output_transactions %>
+  </div>
+</div>

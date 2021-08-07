@@ -2,41 +2,33 @@ class Bank::TransactionsController < ApplicationController
   before_action :authenticate
 
   def create
-    bank_account = current_account.bank_account
-    target_account =
-      ::Account.find_by(email: bank_transaction_params[:output_email])
-        &.bank_account
-
-    @bank_transaction =
+    transaction =
       BankOperations::Transaction::Create.new.(
-        bank_account_id: bank_account.id,
-        output_id: target_account.id,
-        amount: bank_transaction_params[:amount],
+        user_id: current_account.id,
+        email: transaction_params[:output_email],
+        amount: transaction_params[:amount],
       )
 
-    respond_to do |format|
-      if @bank_transaction.success?
-        format.html do
-          redirect_to bank_account_url,
-                      notice: 'Transaction was successfully created.'
-        end
-        format.json do
-          render :show, status: :created, location: @bank_transaction
-        end
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json do
-          render json: @bank_transaction.exception,
-                 status: :unprocessable_entity
-        end
-      end
+    if transaction.success?
+      store_retry_data(transaction.value!)
+      redirect_on_success
+    else
+      @account = current_account.bank_account
+      render 'bank/accounts/show', status: :unprocessable_entity
     end
   end
 
   private
 
   # Only allow a list of trusted parameters through.
-  def bank_transaction_params
-    params.require(:bank_transaction).permit(:amount, :status, :output_email)
+  def transaction_params
+    params.require(:bank_transaction).permit(:amount, :output_email)
+  end
+
+  def redirect_on_success
+    redirect_to bank_account_url,
+                flash: {
+                  success: 'Transaction was successfully created.',
+                }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_131643) do
+ActiveRecord::Schema.define(version: 2021_08_07_174522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_131643) do
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_bank_accounts_on_account_id"
+    t.index ["account_id"], name: "index_bank_accounts_on_account_id", unique: true
   end
 
   create_table "bank_transactions", force: :cascade do |t|
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 2021_08_05_131643) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bank_account_id"], name: "index_bank_transactions_on_bank_account_id"
     t.index ["output_id"], name: "index_bank_transactions_on_output_id"
+  end
+
+  create_table "idempotency_keys", force: :cascade do |t|
+    t.string "key"
+    t.string "retriable_type"
+    t.bigint "retriable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["retriable_type", "retriable_id"], name: "index_idempotency_keys_on_retriable"
   end
 
   add_foreign_key "account_password_hashes", "accounts", column: "id"
