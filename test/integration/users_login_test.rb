@@ -11,7 +11,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     get '/login'
     assert_select 'h2', 'Account Login'
     login(email: @account.email, password: 'invalid')
-    assert_select 'h2', 'Account Login'
     assert_not flash.empty?
     get '/login'
     assert flash.empty?

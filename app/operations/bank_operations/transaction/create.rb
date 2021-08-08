@@ -11,13 +11,8 @@ module BankOperations
           values = validated_params.to_h
           find_input_account(values[:user_id]).bind do |input_account|
             find_output_account(values[:email]).bind do |output_account|
-              Bank::Transaction.transaction do
-                create_transaction(
-                  input_account,
-                  output_account,
-                  values[:amount],
-                ).bind { |transaction| update_balances(transaction) }
-              end
+              create_transaction(input_account, output_account, values[:amount])
+                .bind { |transaction| update_balances(transaction) }
             end
           end
         end
@@ -48,11 +43,18 @@ module BankOperations
             output_id: output_account.id,
           )
 
-        transaction.valid? ? Success(transaction) : Failure(transaction)
+        if transaction.valid?
+          Success(transaction)
+        else
+          transaction.failed!
+          Failure(transaction.errors.to_a.first)
+        end
       end
 
       def update_balances(transaction)
-        Try() { transaction.update_balances }
+        res = Try() { transaction.update_balances }
+        res.error? ? transaction.failed! : transaction.done!
+        res.to_result { :balance_update_failed }
       end
     end
   end

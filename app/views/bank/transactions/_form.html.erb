@@ -1,9 +1,9 @@
-<%= form_with(model: bank_transaction) do |form| %>
-  <% if bank_transaction.errors.any? %>
+<%= form_with(model: transaction) do |form| %>
+  <% if transaction.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(bank_transaction.errors.count, "error") %> prohibited this bank_transaction from being saved:</h2>
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
       <ul>
-        <% bank_transaction.errors.each do |error| %>
+        <% transaction.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -20,7 +20,7 @@
     <%= form.text_field :amount, class: "form-control", placeholder: "Enter tranfer amount" %>
   </div>
 
-  <%= form.hidden_field(:idempotency_key, value: @idempotency_key) %>
+  <%= form.hidden_field(:idempotency_key, value: new_idempotentcy_key) %>
 
   <div class="form-group mb-3">
     <%= submit_tag 'Submit', class: "btn btn-primary" %>

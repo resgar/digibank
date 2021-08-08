@@ -4,7 +4,7 @@ class Bank::Transaction < ApplicationRecord
   belongs_to :bank_account, class_name: 'Bank::Account'
   belongs_to :output, class_name: 'Bank::Account', foreign_key: :output_id
 
-  enum status: %i[pending running done]
+  enum status: %i[pending processing done failed]
 
   validates :amount, presence: true
 
@@ -12,14 +12,13 @@ class Bank::Transaction < ApplicationRecord
     return unless self.pending?
 
     Bank::Transaction.transaction do
-      self.running!
+      self.processing!
       bank_account.lock!
-      output.lock!
       bank_account.balance -= amount
       bank_account.save!
+      output.lock!
       output.balance += amount
       output.save!
-      self.done!
     end
     self
   end

@@ -1,21 +1,20 @@
 FactoryBot.define do
   factory :account do
-    email { 'user@example.com' }
+    sequence(:email) { |n| "person#{n}@example.com" }
     password { 'secret' }
   end
 
   factory :bank_account, class: Bank::Account do
     balance { 100 }
     account
-
-    trait :output do
-      association :account, email: 'another@example.com'
-    end
   end
 
   factory :transaction, class: Bank::Transaction do
     bank_account
     amount { 20 }
-    association :output, :output, factory: :bank_account
+    association :output, factory: :bank_account
+    trait :same_account do
+      after(:build) { |o, values| o.output_id = values.bank_account_id }
+    end
   end
 end

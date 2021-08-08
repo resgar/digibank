@@ -36,8 +36,10 @@ gem 'rodauth-rails', '~> 0.15'
 
 # Provides a way of handling errors, exceptions and chaining functions.
 gem 'dry-monads', '~> 1.4.0'
-# a data validation library that provides a powerful DSL for defining schemas and validation rules.
+# Provides a DSL for defining schemas and validation rules.
 gem 'dry-validation', '~> 1.6.0'
+# Provides DSL for defining typed struct classes.
+gem 'dry-struct', '~> 1.4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

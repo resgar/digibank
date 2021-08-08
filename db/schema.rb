@@ -49,13 +49,13 @@ ActiveRecord::Schema.define(version: 2021_08_07_174522) do
     t.index ["output_id"], name: "index_bank_transactions_on_output_id"
   end
 
-  create_table "idempotency_keys", force: :cascade do |t|
+  create_table "idempotent_models", force: :cascade do |t|
     t.string "key"
     t.string "retriable_type"
     t.bigint "retriable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["retriable_type", "retriable_id"], name: "index_idempotency_keys_on_retriable"
+    t.index ["retriable_type", "retriable_id"], name: "index_idempotent_models_on_retriable"
   end
 
   add_foreign_key "account_password_hashes", "accounts", column: "id"

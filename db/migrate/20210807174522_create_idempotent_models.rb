@@ -1,6 +1,6 @@
-class CreateIdempotencyKeys < ActiveRecord::Migration[6.1]
+class CreateIdempotentModels < ActiveRecord::Migration[6.1]
   def change
-    create_table :idempotency_keys do |t|
+    create_table :idempotent_models do |t|
       t.string :key
       t.references :retriable, polymorphic: true
       t.timestamps

@@ -111,6 +111,10 @@ GEM
       dry-initializer (~> 3.0)
       dry-logic (~> 1.0)
       dry-types (~> 1.5)
+    dry-struct (1.4.0)
+      dry-core (~> 0.5, >= 0.5)
+      dry-types (~> 1.5)
+      ice_nine (~> 0.11)
     dry-types (1.5.1)
       concurrent-ruby (~> 1.0)
       dry-container (~> 0.3)
@@ -136,6 +140,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     jaro_winkler (1.5.4)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
@@ -325,6 +330,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   dry-monads (~> 1.4.0)
+  dry-struct (~> 1.4.0)
   dry-validation (~> 1.6.0)
   factory_bot_rails
   jbuilder (~> 2.7)

@@ -5,11 +5,25 @@ class TransactionTest < ActionDispatch::IntegrationTest
 
   def setup
     @bank_account = create(:bank_account)
+    @output_bank_account = create(:bank_account)
+  end
+
+  test 'transaction with amount more than balance' do
+    login(
+      email: @bank_account.account.email,
+      password: @bank_account.account.password,
+    )
+
+    post bank_transactions_url,
+         params: {
+           bank_transaction: {
+             amount: 1000,
+             output_email: @output_bank_account.account.email,
+           },
+         }
   end
 
   test 'transaction with repeated idempotency_key' do
-    output_bank_account = create(:bank_account, :output)
-
     login(
       email: @bank_account.account.email,
       password: @bank_account.account.password,
@@ -19,17 +33,17 @@ class TransactionTest < ActionDispatch::IntegrationTest
          params: {
            bank_transaction: {
              amount: 20,
-             output_email: output_bank_account.account.email,
+             output_email: @output_bank_account.account.email,
            },
            idempotency_key: 'foo',
          }
 
-    assert_no_difference('output_bank_account.reload.balance') do
+    assert_no_difference('@output_bank_account.reload.balance') do
       post bank_transactions_url,
            params: {
              bank_transaction: {
                amount: 20,
-               output_email: output_bank_account.account.email,
+               output_email: @output_bank_account.account.email,
              },
              idempotency_key: 'foo',
            }
@@ -37,8 +51,6 @@ class TransactionTest < ActionDispatch::IntegrationTest
   end
 
   test 'transaction with different idempotency_key' do
-    output_bank_account = create(:bank_account, :output)
-
     login(
       email: @bank_account.account.email,
       password: @bank_account.account.password,
@@ -48,17 +60,17 @@ class TransactionTest < ActionDispatch::IntegrationTest
          params: {
            bank_transaction: {
              amount: 20,
-             output_email: output_bank_account.account.email,
+             output_email: @output_bank_account.account.email,
            },
            idempotency_key: 'foo',
          }
 
-    assert_difference('output_bank_account.reload.balance', 20) do
+    assert_difference('@output_bank_account.reload.balance', 20) do
       post bank_transactions_url,
            params: {
              bank_transaction: {
                amount: 20,
-               output_email: output_bank_account.account.email,
+               output_email: @output_bank_account.account.email,
              },
              idempotency_key: 'bar',
            }

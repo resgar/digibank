@@ -5,27 +5,27 @@
 <div class="row">
   <div class="col-sm">
     <p class="h4">
-      Account #<%= @account.account_id %>
+      Account #<%= @account_query.object.id %>
     </p>
     <br>
     <p class="h4">
       <strong>Balance:</strong>
-      $<%= @account.balance %>
+      $<%= @account_query.object.balance %>
     </p>
   </div>
   <div class="col-sm">
     <h2>New Transaction</h2>
-    <%= render 'bank/transactions/form', bank_transaction: @transaction %>
+    <%= render 'bank/transactions/form', transaction: @transaction %>
   </div>
 </div>
 <hr/>
 <div class="row">
   <div class="col-sm">
     <h3>Input Transactions</h2>
-    <%= render 'bank/transactions/transactions', transactions: @input_transactions %>
+    <%= render 'bank/transactions/transactions', transactions: @account_query.input_transactions %>
   </div>
   <div class="col-sm">
     <h3>Output Transactions</h2>
-    <%= render 'bank/transactions/transactions', transactions: @output_transactions %>
+    <%= render 'bank/transactions/transactions', transactions: @account_query.output_transactions %>
   </div>
 </div>
