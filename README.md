@@ -1,24 +1,19 @@
-# README
+## Requirements
+The list of requirements to install this app are:
+* Ruby >= 3.0.x
+* PostgreSQL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
+* `` git clone https://github.com/resgar/digibank.git``
+* `` bundle install ``
 
-Things you may want to cover:
+* Set Postgres usernam and password:
+```
+export POSTGRES_USERNAME='Your Postgres Username'
+export POSTGRES_PASSWORD='Your Postgres Password'
+```
 
-* Ruby version
+* `` bundle exec rails server ``
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Running tests
+` bundle exec rails test `
