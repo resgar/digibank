@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module UserContracts
   module Registration
     class Create < Dry::Validation::Contract
@@ -7,15 +8,11 @@ module UserContracts
       end
 
       rule(:email) do
-        unless value =~ URI::MailTo::EMAIL_REGEXP
-          key.failure('must meet requirements')
-        end
+        key.failure('must meet requirements') unless value =~ URI::MailTo::EMAIL_REGEXP
       end
 
       rule(:password) do
-        unless Rodauth::Rails.rodauth.password_meets_requirements?(value)
-          key.failure('must meet requirements')
-        end
+        key.failure('must meet requirements') unless Rodauth::Rails.rodauth.password_meets_requirements?(value)
       end
     end
   end

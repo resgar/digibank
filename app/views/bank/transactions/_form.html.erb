@@ -17,7 +17,7 @@
 
   <div class="form-group mb-3">
     <%= form.label :amount, class: "form-label" %>
-    <%= form.text_field :amount, class: "form-control", placeholder: "Enter tranfer amount" %>
+    <%= form.text_field :amount, type: "number", min: "0", class: "form-control", placeholder: "Enter tranfer amount" %>
   </div>
 
   <%= form.hidden_field(:idempotency_key, value: new_idempotentcy_key) %>

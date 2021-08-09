@@ -1,6 +1,8 @@
+# frozen_string_literal: true
 require 'test_helper'
 
-class Bank::TransactionsControllerTest < ActionDispatch::IntegrationTest
+module Bank
+  class TransactionsControllerTest < ActionDispatch::IntegrationTest
   include IntegrationHelperTest
 
   def setup
@@ -36,5 +38,6 @@ class Bank::TransactionsControllerTest < ActionDispatch::IntegrationTest
          }
 
     # assert_redirected_to bank_account_url
+  end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module UserOperations
   module Registration
     class Create
@@ -16,7 +17,7 @@ module UserOperations
 
       def validate(params)
         create_contract = UserContracts::Registration::Create.new
-        create_contract.(params).to_monad
+        create_contract.call(params).to_monad
       end
 
       def create_user(validated_params)

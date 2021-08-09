@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class RodauthApp < Rodauth::Rails::App
   configure do
     # List of authentication features that are loaded.

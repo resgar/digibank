@@ -21,11 +21,11 @@
 <hr/>
 <div class="row">
   <div class="col-sm">
-    <h3>Input Transactions</h2>
-    <%= render 'bank/transactions/transactions', transactions: @account_query.input_transactions %>
+    <h3>Sent Transactions</h2>
+    <%= render 'bank/transactions/input_transactions', transactions: @account_query.input_transactions %>
   </div>
   <div class="col-sm">
-    <h3>Output Transactions</h2>
-    <%= render 'bank/transactions/transactions', transactions: @account_query.output_transactions %>
+    <h3>Received Transactions</h2>
+    <%= render 'bank/transactions/output_transactions', transactions: @account_query.output_transactions %>
   </div>
 </div>

@@ -17,8 +17,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: ENV["DBANK_PG_PASS"]
+  username: <%= ENV["POSTGRES_USERNAME"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -84,5 +84,3 @@ test:
 production:
   <<: *default
   database: digibank_production
-  username: digibank
-  password: <%= ENV['DIGIBANK_DATABASE_PASSWORD'] %>

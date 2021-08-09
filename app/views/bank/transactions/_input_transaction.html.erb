@@ -1,0 +1,7 @@
+<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">$<%= transaction.amount %></h5>
+    <small><span class="badge bg-<%= transaction.done? ? 'success' : 'secondary' %>"><%= transaction.status.capitalize %></span></small>
+  </div>
+  <p class="mb-1"><%= transaction.output.account.email %></p>
+</a>

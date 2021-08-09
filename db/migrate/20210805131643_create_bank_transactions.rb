@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateBankTransactions < ActiveRecord::Migration[6.1]
   def change
     create_table :bank_transactions do |t|

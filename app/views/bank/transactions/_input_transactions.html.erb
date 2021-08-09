@@ -1,0 +1,5 @@
+<div class="list-group">
+  <% @account_query.input_transactions.each do |transaction| %>
+    <%= render 'bank/transactions/input_transaction', transaction: transaction %>
+  <% end %>
+</div>

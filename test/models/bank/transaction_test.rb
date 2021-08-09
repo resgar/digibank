@@ -1,6 +1,8 @@
+# frozen_string_literal: true
 require 'test_helper'
 
-class Bank::TransactionTest < ActiveSupport::TestCase
+module Bank
+  class TransactionTest < ActiveSupport::TestCase
   def setup
     @transaction = create(:transaction)
     @account = @transaction.bank_account
@@ -43,5 +45,6 @@ class Bank::TransactionTest < ActiveSupport::TestCase
   test 'should fail when transaction amount is more than balance' do
     transaction = create(:transaction, amount: 1000)
     assert_raises(ActiveRecord::RecordInvalid) { transaction.update_balances }
+  end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module BankOperations
   module Transaction
     class Create
@@ -22,7 +23,7 @@ module BankOperations
 
       def validate(params)
         create_contract = BankContracts::Transaction::Create.new
-        create_contract.(params).to_monad
+        create_contract.call(params).to_monad
       end
 
       def find_input_account(user_id)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This migration comes from bank (originally 20210803153416)
 class CreateBankAccounts < ActiveRecord::Migration[6.1]
   def change
