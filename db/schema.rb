@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_07_174522) do
+ActiveRecord::Schema.define(version: 2021_08_10_165653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -25,17 +25,12 @@ ActiveRecord::Schema.define(version: 2021_08_07_174522) do
     t.datetime "deadline", null: false
   end
 
-  create_table "accounts", force: :cascade do |t|
-    t.citext "email", null: false
-    t.index ["email"], name: "index_accounts_on_email", unique: true
-  end
-
   create_table "bank_accounts", force: :cascade do |t|
     t.float "balance", default: 0.0, null: false
-    t.bigint "account_id", null: false
+    t.bigint "user_account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_bank_accounts_on_account_id", unique: true
+    t.index ["user_account_id"], name: "index_bank_accounts_on_user_account_id", unique: true
   end
 
   create_table "bank_transactions", force: :cascade do |t|
@@ -58,9 +53,14 @@ ActiveRecord::Schema.define(version: 2021_08_07_174522) do
     t.index ["retriable_type", "retriable_id"], name: "index_idempotent_models_on_retriable"
   end
 
-  add_foreign_key "account_password_hashes", "accounts", column: "id"
-  add_foreign_key "account_remember_keys", "accounts", column: "id"
-  add_foreign_key "bank_accounts", "accounts"
+  create_table "user_accounts", force: :cascade do |t|
+    t.citext "email", null: false
+    t.index ["email"], name: "index_user_accounts_on_email", unique: true
+  end
+
+  add_foreign_key "account_password_hashes", "user_accounts", column: "id"
+  add_foreign_key "account_remember_keys", "user_accounts", column: "id"
+  add_foreign_key "bank_accounts", "user_accounts"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "bank_transactions", "bank_accounts", column: "output_id"
 end

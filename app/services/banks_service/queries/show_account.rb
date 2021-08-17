@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-module Bank
-  module Accounts
-    class ShowQuery
+module BanksService
+  module Queries
+    class ShowAccount
       attr_reader :object
 
       def initialize(record)

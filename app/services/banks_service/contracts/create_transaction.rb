@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-module BankContracts
-  module Transaction
-    class Create < Dry::Validation::Contract
+module BanksService
+  module Contracts
+    class CreateTransaction < Dry::Validation::Contract
       params do
         required(:amount).value(:float)
         required(:user_id).value(:integer)

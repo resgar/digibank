@@ -1,13 +1,13 @@
 # frozen_string_literal: true
-module UserOperations
-  module Registration
-    class Create
+module UsersService
+  module Commands
+    class CreateAccount
       include Dry::Monads[:result]
       Dry::Validation.load_extensions(:monads)
 
       def call(params)
         validate(params).bind do |validated_params|
-          ::Account.transaction do
+          User::Account.transaction do
             create_user(validated_params.to_h).fmap(&:create_bank_account)
           end
         end
@@ -16,13 +16,13 @@ module UserOperations
       private
 
       def validate(params)
-        create_contract = UserContracts::Registration::Create.new
+        create_contract = Contracts::CreateAccount.new
         create_contract.call(params).to_monad
       end
 
       def create_user(validated_params)
         user =
-          ::Account.create(
+          User::Account.create(
             email: validated_params[:email],
             password: validated_params[:password],
           )

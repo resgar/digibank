@@ -2,13 +2,13 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
-  before_action :current_account, if: -> { rodauth.logged_in? }
+  before_action :current_user, if: -> { rodauth.logged_in? }
   before_action :retried_request?
 
   private
 
-  def current_account
-    @current_account ||= Account.find(rodauth.session_value)
+  def current_user
+    @current_user ||= User::Account.find(rodauth.session_value)
   rescue ActiveRecord::RecordNotFound
     rodauth.logout
     rodauth.login_required
@@ -18,5 +18,5 @@ class ApplicationController < ActionController::Base
     rodauth.require_authentication # redirect to login page if not authenticated
   end
 
-  helper_method :current_account, :authenticate
+  helper_method :current_user, :authenticate
 end

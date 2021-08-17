@@ -5,7 +5,7 @@ module Bank
 
     def show
       @account_query =
-        Bank::Accounts::ShowQuery.new(current_account.bank_account)
+        BanksService::Queries::ShowAccount.new(current_user.bank_account)
       @transaction = Bank::Transaction.new
     end
   end

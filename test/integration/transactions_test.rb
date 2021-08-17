@@ -11,30 +11,30 @@ class TransactionTest < ActionDispatch::IntegrationTest
 
   test 'transaction with amount more than balance' do
     login(
-      email: @bank_account.account.email,
-      password: @bank_account.account.password,
+      email: @bank_account.user_account.email,
+      password: @bank_account.user_account.password,
     )
 
     post bank_transactions_url,
          params: {
            bank_transaction: {
              amount: 1000,
-             output_email: @output_bank_account.account.email,
+             output_email: @output_bank_account.user_account.email,
            },
          }
   end
 
   test 'transaction with repeated idempotency_key' do
     login(
-      email: @bank_account.account.email,
-      password: @bank_account.account.password,
+      email: @bank_account.user_account.email,
+      password: @bank_account.user_account.password,
     )
 
     post bank_transactions_url,
          params: {
            bank_transaction: {
              amount: 20,
-             output_email: @output_bank_account.account.email,
+             output_email: @output_bank_account.user_account.email,
            },
            idempotency_key: 'foo',
          }
@@ -44,7 +44,7 @@ class TransactionTest < ActionDispatch::IntegrationTest
            params: {
              bank_transaction: {
                amount: 20,
-               output_email: @output_bank_account.account.email,
+               output_email: @output_bank_account.user_account.email,
              },
              idempotency_key: 'foo',
            }
@@ -53,15 +53,15 @@ class TransactionTest < ActionDispatch::IntegrationTest
 
   test 'transaction with different idempotency_key' do
     login(
-      email: @bank_account.account.email,
-      password: @bank_account.account.password,
+      email: @bank_account.user_account.email,
+      password: @bank_account.user_account.password,
     )
 
     post bank_transactions_url,
          params: {
            bank_transaction: {
              amount: 20,
-             output_email: @output_bank_account.account.email,
+             output_email: @output_bank_account.user_account.email,
            },
            idempotency_key: 'foo',
          }
@@ -71,7 +71,7 @@ class TransactionTest < ActionDispatch::IntegrationTest
            params: {
              bank_transaction: {
                amount: 20,
-               output_email: @output_bank_account.account.email,
+               output_email: @output_bank_account.user_account.email,
              },
              idempotency_key: 'bar',
            }
@@ -80,15 +80,15 @@ class TransactionTest < ActionDispatch::IntegrationTest
 
   test 'should not allow negative transaction' do
     login(
-      email: @bank_account.account.email,
-      password: @bank_account.account.password,
+      email: @bank_account.user_account.email,
+      password: @bank_account.user_account.password,
     )
     assert_difference('@output_bank_account.reload.balance', 0) do
       post bank_transactions_url,
            params: {
              bank_transaction: {
                amount: -50,
-               output_email: @output_bank_account.account.email,
+               output_email: @output_bank_account.user_account.email,
              },
            }
     end

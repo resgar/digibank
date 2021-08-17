@@ -3,6 +3,7 @@ class RodauthApp < Rodauth::Rails::App
   configure do
     # List of authentication features that are loaded.
     enable :create_account, :login, :logout, :remember
+    accounts_table :user_accounts
 
     # See the Rodauth documentation for the list of available config options:
     # http://rodauth.jeremyevans.net/documentation.html

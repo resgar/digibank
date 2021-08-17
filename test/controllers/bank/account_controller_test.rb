@@ -6,7 +6,7 @@ module Bank
     include IntegrationHelperTest
 
     def setup
-      @account = create(:bank_account).account
+      @account = create(:bank_account).user_account
     end
 
     test 'should show account' do

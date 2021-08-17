@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 FactoryBot.define do
-  factory :account do
+  factory :user_account, class: User::Account do
     sequence(:email) { |n| "person#{n}@example.com" }
     password { 'secret' }
   end
 
   factory :bank_account, class: Bank::Account do
     balance { 100 }
-    account
+    user_account
   end
 
   factory :transaction, class: Bank::Transaction do

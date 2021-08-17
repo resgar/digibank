@@ -5,7 +5,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   include IntegrationHelperTest
 
   def setup
-    @account = create(:bank_account).account
+    @account = create(:bank_account).user_account
   end
 
   test 'login with valid email/invalid password' do

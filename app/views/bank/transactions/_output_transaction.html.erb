@@ -3,5 +3,5 @@
     <h5 class="mb-1">$<%= transaction.amount %></h5>
     <small><span class="badge bg-<%= transaction.done? ? 'success' : 'secondary' %>"><%= transaction.status.capitalize %></span></small>
   </div>
-  <p class="mb-1"><%= transaction.bank_account.account.email %></p>
+  <p class="mb-1"><%= transaction.bank_account.user_account.email %></p>
 </a>

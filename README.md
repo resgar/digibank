@@ -21,7 +21,7 @@ export POSTGRES_PASSWORD='Your Postgres Password'
 
 ## Creating a new user
 *  `rails console`
-*  ` UserOperations::Registration::Create.new.(email: 'user@example.com',
+*  ` UsersService::Commands::CreateAccount.new.(email: 'user@example.com',
  password: 'secret') `
 
 ## Running tests

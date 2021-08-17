@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 module Bank
   class Account < ApplicationRecord
-    belongs_to :account, class_name: '::Account'
+    belongs_to :user_account,
+               class_name: 'User::Account',
+               inverse_of: :bank_account
+
     has_many :input_transactions,
              class_name: 'Bank::Transaction',
              dependent: :destroy,

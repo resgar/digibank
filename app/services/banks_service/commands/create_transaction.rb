@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-module BankOperations
-  module Transaction
-    class Create
+module BanksService
+  module Commands
+    class CreateTransaction
       include Dry::Monads[:result]
       include Dry::Monads[:try]
       include Dry::Monads[:maybe]
@@ -22,17 +22,17 @@ module BankOperations
       private
 
       def validate(params)
-        create_contract = BankContracts::Transaction::Create.new
+        create_contract = Contracts::CreateTransaction.new
         create_contract.call(params).to_monad
       end
 
       def find_input_account(user_id)
-        account = Bank::Account.find_by(account_id: user_id)
+        account = Bank::Account.find_by(user_account_id: user_id)
         Maybe(account).to_result { :input_account_not_found }
       end
 
       def find_output_account(email)
-        account = ::Account.find_by(email: email)&.bank_account
+        account = User::Account.find_by(email: email)&.bank_account
         Maybe(account).to_result { :output_account_not_found }
       end
 
